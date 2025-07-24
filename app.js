@@ -10,21 +10,24 @@ const { format } = require("date-fns");
 var indexRouter = require("./routes/index");
 
 async function getApp() {
-
   // Database
   // Use AZURE_COSMOS_CONNECTIONSTRING if available, otherwise fall back to MONGODB_URI
-  const mongoUri = process.env.MONGODB_URI; // For App Service, change to process.env.AZURE_COSMOS_CONNECTIONSTRING || process.env.MONGODB_URI;
+  const mongoUri =
+    process.env.AZURE_COSMOS_CONNECTIONSTRING || process.env.MONGODB_URI;
 
-  mongoose.connect(mongoUri).then(() => {
-    console.log('Connected to database');
-  }).catch((err) => {
-    console.error('Error connecting to database:', err);
-  });
+  mongoose
+    .connect(mongoUri)
+    .then(() => {
+      console.log("Connected to database");
+    })
+    .catch((err) => {
+      console.error("Error connecting to database:", err);
+    });
 
   var app = express();
 
-  var port = normalizePort(process.env.PORT || '3000');
-  app.set('port', port);
+  var port = normalizePort(process.env.PORT || "3000");
+  app.set("port", port);
 
   // view engine setup
   app.set("views", path.join(__dirname, "views"));
@@ -67,7 +70,7 @@ async function getApp() {
  * Normalize a port into a number, string, or false.
  */
 
- function normalizePort(val) {
+function normalizePort(val) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -83,5 +86,5 @@ async function getApp() {
   return false;
 }
 module.exports = {
-  getApp
+  getApp,
 };
